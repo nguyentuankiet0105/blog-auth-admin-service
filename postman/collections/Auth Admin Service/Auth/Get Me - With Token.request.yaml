@@ -1,0 +1,29 @@
+$kind: http-request
+name: 'Get Me - With Token'
+url: '{{base_url}}/auth/me'
+method: GET
+order: 4000
+headers:
+  - key: Authorization
+    value: 'Bearer {{access_token}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 200 OK", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Response contains JWT payload fields", function () {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("sub");
+          pm.expect(json).to.have.property("email");
+          pm.expect(json).to.have.property("role");
+          pm.expect(json).to.have.property("iat");
+          pm.expect(json).to.have.property("exp");
+      });
+
+      pm.test("Role is a valid value", function () {
+          const json = pm.response.json();
+          pm.expect(["USER", "ADMIN"]).to.include(json.role);
+      });

@@ -1,0 +1,3 @@
+$kind: collection
+description: Health check endpoints for the service.
+order: 2000

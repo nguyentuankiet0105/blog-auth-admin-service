@@ -1,0 +1,4 @@
+$kind: collection
+description: Collection for the Auth Admin Service API — authentication and health endpoints.
+variables:
+  base_url: http://localhost:3000
