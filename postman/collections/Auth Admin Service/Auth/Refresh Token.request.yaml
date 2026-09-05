@@ -1,5 +1,5 @@
 $kind: http-request
-url: "{{base_url}}/auth/login"
+url: "{{base_url}}/auth/refresh"
 method: POST
 headers:
   Content-Type: application/json
@@ -7,10 +7,9 @@ body:
   type: json
   content: |-
     {
-      "email": "admin@example.com",
-      "password": "password123"
+      "refreshToken": "{{refresh_token}}"
     }
-order: 2000
+order: 3000
 scripts:
   - type: afterResponse
     code: |-
